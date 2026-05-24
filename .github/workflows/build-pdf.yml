@@ -22,7 +22,7 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: rapport/main.tex
-          # latexmk lance pdflatex plusieurs fois automatiquement
+          work_in_root_file_dir: true  # cd dans rapport/ avant de compiler
 
       - name: Sauvegarder comme artefact (30 jours)
         uses: actions/upload-artifact@v4
