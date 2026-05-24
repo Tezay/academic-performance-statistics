@@ -24,25 +24,27 @@ jobs:
           root_file: rapport/main.tex
           work_in_root_file_dir: true  # cd dans rapport/ avant de compiler
 
+      - name: Renommer le PDF
+        run: cp rapport/main.pdf rapport/rapport-performance-academique-efrei.pdf
+
       - name: Sauvegarder comme artefact (30 jours)
         uses: actions/upload-artifact@v4
         with:
-          name: rapport-pdf
-          path: rapport/main.pdf
+          name: rapport-performance-academique-efrei
+          path: rapport/rapport-performance-academique-efrei.pdf
           retention-days: 30
 
       - name: Mettre à jour la release "latest"
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "rapport/main.pdf"
-          artifactName: rapport.pdf
+          artifacts: "rapport/rapport-performance-academique-efrei.pdf"
           tag: latest
           name: "Rapport — Dernière version compilée"
           body: |
             PDF compilé automatiquement depuis la branche `main`.
 
-            **Cliquez sur `rapport.pdf` ci-dessous pour télécharger.**
-          allowUpdates: true       # met à jour la release si elle existe déjà
-          removeArtifacts: true    # remplace l'ancien PDF par le nouveau
+            **Cliquez sur `rapport-performance-academique-efrei.pdf` ci-dessous pour télécharger.**
+          allowUpdates: true
+          removeArtifacts: true
           makeLatest: true
           token: ${{ secrets.GITHUB_TOKEN }}

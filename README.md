@@ -5,7 +5,7 @@
 
 [![Compiler le rapport PDF](https://github.com/Tezay/academic-performance-statistics/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/Tezay/academic-performance-statistics/actions/workflows/build-pdf.yml)
 &nbsp;
-**[⬇ Télécharger le rapport (PDF)](https://github.com/Tezay/academic-performance-statistics/releases/latest/download/rapport.pdf)**
+**[⬇ Télécharger le rapport (PDF)](https://github.com/Tezay/academic-performance-statistics/releases/latest/download/rapport-performance-academique-efrei.pdf)**
 
 ---
 
