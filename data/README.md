@@ -1,18 +1,17 @@
-# Dictionnaire des variables — Données de sondage
+# Dictionnaire des variables – Données de sondage
 
 > Ce fichier décrit les variables contenues dans chaque CSV.  
-> Classification selon la **Définition 1.3** du cours SM403 (qualitative / quantitative).  
-> **À compléter par Membre 1** après nettoyage des données.
+> Classification selon la **Définition 1.3** du cours SM403 (qualitative / quantitative).
 
 ---
 
-## ADD_SC3_SC4.csv — Sondage principal (n = 72)
+## ADD_SC3_SC4.csv – Sondage principal (n = 72)
 
 Sondage conçu par les classes SC3 et SC4 de P2, administré aux classes SC5, SC6, SC7 et BDX de P1 sur leur semestre 1.
 
 | # | Variable (intitulé dans le CSV) | Type | Modalités / Plage | Rôle dans l'étude |
 |---|---|---|---|---|
-| 1 | Horodateur | — | Date/heure | Identification (exclure de l'analyse) |
+| 1 | Horodateur | – | Date/heure | Identification (exclure de l'analyse) |
 | 2 | Annales travaillées avant CE/DE | Quantitative discrète | 0 à 4+ (0, 1, 2, 3, 4+) | Habitudes de préparation aux examens |
 | 3 | Équilibre vie personnelle / études (0 à 5) | Qualitative ordinale | 0 à 5 | Bien-être général |
 | 4 | Confiance avant DE vs performance finale (1 à 5) | Qualitative ordinale | 1 à 5 | Auto-évaluation de la confiance |
@@ -30,14 +29,16 @@ Sondage conçu par les classes SC3 et SC4 de P2, administré aux classes SC5, SC
 | 16 | Classe | Qualitative nominale | P1-SC5, P1-SC6, P1-SC7, P1-BDX | Sous-groupe de l'échantillon |
 | 17 | A fait le semestre à l'EFREI | Qualitative nominale | Oui / Non | **Filtre : exclure les "Non"** |
 
-**Notes de nettoyage (à compléter par Membre 1) :**
-- Lignes exclues (réponse "Non" à la dernière question) : ___ lignes
-- Valeurs manquantes détectées : ___
-- Effectif après nettoyage : n = ___
+**Notes de nettoyage :**
+- Réponses brutes : 71
+- Exclues : 3 (2 réponses "Non" à V17 + 1 réponse incomplète)
+- Effectif après nettoyage : **n = 68**
+- Répartition : P1-SC5 (25), P1-SC6 (16), P1-SC7 (13), P1-BDX (14)
+- Valeur aberrante détectée : V12 modalité "1 : -8 (je suis une fraude)" → 1 occurrence (à exclure des tests χ²)
 
 ---
 
-## ADD_PP1_PP2.csv — Sondage PP1/PP2 (n = 49)
+## ADD_PP1_PP2.csv – Sondage PP1/PP2 (n = 49)
 
 Sondage conçu par les classes PP1 et PP2 de P2, administré aux classes PrépaPlus-MP et PrépaPlus-P de P1.  
 Format différent (questionnaire Microsoft Forms avec colonnes Points/Feedback).
@@ -60,7 +61,7 @@ Variables principales identifiées :
 
 ---
 
-## ADD_SC1_SC2.csv — Sondage SC1/SC2 (n = 101)
+## ADD_SC1_SC2.csv – Sondage SC1/SC2 (n = 101)
 
 Sondage conçu par les classes SC1 et SC2 de P2.  
 Variables principales identifiées :
@@ -74,7 +75,7 @@ Variables principales identifiées :
 
 ---
 
-## ADD_SC5_SC6.csv — Sondage SC5/SC6 (n = 85)
+## ADD_SC5_SC6.csv – Sondage SC5/SC6 (n = 85)
 
 Sondage conçu par les classes SC5 et SC6 de P2.  
 Variables principales identifiées :
@@ -103,4 +104,4 @@ Variables principales identifiées :
 
 - **Sondage principal** pour l'analyse : `ADD_SC3_SC4.csv` (sondage du groupe)
 - Les trois autres sondages peuvent enrichir la réflexion mais ont des questions différentes
-- Les variables mesurées sur des échelles ordinales (1 à 5) sont **qualitatives ordinales** au sens de la Définition 1.3 du cours — les traiter comme quantitatives est une approximation à mentionner explicitement dans la section "Limites de l'étude"
+- Les variables mesurées sur des échelles ordinales (1 à 5) sont **qualitatives ordinales** au sens de la Définition 1.3 du cours – les traiter comme quantitatives est une approximation à mentionner explicitement dans la section "Limites de l'étude"

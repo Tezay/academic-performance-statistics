@@ -1,5 +1,5 @@
 % ============================================================
-%  Section 1 — Définition du cadre de l'étude
+%  Section 1 – Définition du cadre de l'étude
 % ============================================================
 %
 %  Contenu attendu (voir sujet PDF, section "Votre analyse") :
@@ -28,12 +28,58 @@
 
 \subsection{Population et échantillon}
 
-% TODO : rédiger ici
+Conformément à la \textbf{Définition~1.1} du cours, on pose :
+\begin{itemize}
+  \item \textbf{Individu} : un·e étudiant·e de P1 EFREI ayant répondu au sondage.
+  \item \textbf{Population étudiée} : l'ensemble des $N = 68$ réponses valides collectées auprès des classes P1-SC5 ($n=25$), P1-SC6 ($n=16$), P1-SC7 ($n=13$) et P1-BDX ($n=14$), via un Google Forms anonyme diffusé du 14 au 23~avril~2026.
+  \item \textbf{Nettoyage} : 71 réponses brutes ; 3 exclues (2~réponses « Non » à la question de vérification + 1~réponse incomplète), soit $N = 68$.
+\end{itemize}
+
+\textit{Choix méthodologique} : conformément à la consigne, les 68~réponses sont traitées comme une \emph{population} (et non comme un échantillon d'une population plus large). Les tests inférentiels portent sur des sous-populations extraites de ces $N = 68$~individus.
+
+\medskip
+\textbf{Enrichissement.} Un second jeu de données, \texttt{ADD\_SC5\_SC6.csv} ($n = 85$), contient les notes effectives à l'EFREI (Moyenne S1, Note Analyse~1). Il est mobilisé pour relier les habitudes de travail à la performance académique réelle, variable absente du sondage principal.
 
 \subsection{Description des variables collectées}
 
-% TODO : insérer le tableau des variables (voir data/README.md)
+Le sondage collecte 15~variables analysables (V2–V16), classées selon la \textbf{Définition~1.3}. Les quatre variables retenues pour l'analyse approfondie sont indiquées en \textbf{gras}.
+
+\begin{table}[H]
+\centering\footnotesize
+\begin{tabularx}{\linewidth}{c X l c}
+\toprule
+\textbf{\#} & \textbf{Variable – description courte} & \textbf{Type (Déf.~1.3)} & \textbf{Échelle} \\
+\midrule
+V2  & \textbf{Annales travaillées avant CE/DE}               & Quant.\ discrète & 0–4+  \\
+V3  & Équilibre vie personnelle / études                    & Qual.\ ordinale  & 0–5   \\
+V4  & Confiance avant DE reflète la performance             & Qual.\ ordinale  & 1–5   \\
+V5  & Répartition des examens influence les résultats       & Qual.\ ordinale  & 1–5   \\
+\textbf{V6}  & \textbf{Heures de sommeil les nuits précédant un DE}   & Qual.\ ordinale  & 1–5   \\
+V7  & Organisation du travail en dehors des cours           & Qual.\ ordinale  & 1–5   \\
+V8  & Nombre de jours avant CE/DE pour débuter les révisions & Quant.\ discrète & 0–5   \\
+V9  & Implication associative à l'EFREI                     & Qual.\ ordinale  & 0–4   \\
+V10 & Durée des révisions avant un DE                       & Qual.\ ordinale  & 1–5   \\
+V11 & Activité sportive (heures/semaine)                    & Qual.\ ordinale  & 0–4   \\
+\textbf{V12} & \textbf{Moyenne au bac en spécialités scientifiques}$^*$   & Qual.\ ordinale  & 1–5   \\
+V13 & Fréquence de relecture des cours hors révisions       & Qual.\ ordinale  & 0–4   \\
+\textbf{V14} & \textbf{Assiduité aux cours magistraux (CMs)}          & Qual.\ ordinale  & 0–3   \\
+V15 & Temps de trajet domicile–EFREI                        & Qual.\ ordinale  & 1–6   \\
+V16 & Classe (sous-groupe)                                  & Qual.\ nominale  & –     \\
+\bottomrule
+\multicolumn{4}{l}{$^*$~1~réponse aberrante (modalité « $-8$ ») exclue des tests du $\chi^2$.}
+\end{tabularx}
+\caption{Variables du sondage SC3/SC4 – types selon Déf.~1.3. Variables en \textbf{gras} = retenues pour l'analyse.}
+\end{table}
+
+\textbf{Justification du choix.} V12 est le proxy du niveau académique initial ; V2, V6 et V14 mesurent trois facettes des habitudes de travail. Ces quatre variables couvrent l'ensemble des outils d'inférence du cours (IC, conformité, $\chi^2$~d'indépendance).
+
+\textit{Remarque sur V2} : bien que ses modalités soient des entiers (0, 1, 2, 3, 4+), V2 est traitée comme une \textbf{variable quantitative discrète} (Déf.~1.3), ce qui autorise le calcul de la moyenne empirique ($\bar{x} \approx 2{,}19$) et le test de conformité de la moyenne par la loi de Student.
 
 \subsection{Biais potentiels}
 
-% TODO : rédiger ici
+\begin{itemize}
+  \item \textbf{Biais de sélection} : participation volontaire et ciblée sur 4~classes ; les résultats ne sont pas généralisables à l'ensemble de la P1~EFREI.
+  \item \textbf{Biais de déclaration} : les réponses sont des auto-évaluations (ex.\ : nombre d'annales travaillées) ; les valeurs peuvent être imprécises ou arrondies.
+  \item \textbf{Biais de désirabilité sociale} : les répondant·es peuvent surestimer leur assiduité aux CMs ou leur durée de révision.
+  \item \textbf{Représentativité limitée} : le sondage a été conçu par nos classes SC3/SC4, ce qui peut orienter inconsciemment le choix des questions vers nos propres habitudes de travail.
+\end{itemize}

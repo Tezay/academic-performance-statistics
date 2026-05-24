@@ -1,14 +1,14 @@
-# Guide de travail — SM403 Analyse de données
+# Guide de travail – SM403 Analyse de données
 
 > **Règle absolue** : toute démarche mathématique et scientifique doit s'appuyer exclusivement sur le **cours SM403** (`ressources/COURS.pdf`). Lire les définitions et points méthode correspondants **avant** de rédiger.
 
-**Rendu Moodle : samedi 30 mai 2026 à 23h59** — fichier nommé `ADD-SC3-4-<numéro-équipe>.pdf`  
+**Rendu Moodle : samedi 30 mai 2026 à 23h59** – fichier nommé `ADD-SC3-4-1>.pdf`  
 **Soutenance** : 10 min de présentation + 20 min de questions individuelles  
 **Format rapport** : 4 pages maximum (hors annexes), LaTeX
 
 ---
 
-## Vue d'ensemble — Dépendances entre parties
+## Vue d'ensemble – Dépendances entre parties
 
 ```
 Partie 1 ──────────────────────────────────────┐
@@ -19,11 +19,11 @@ Partie 3 (stats desc. qual. + formulation)   │ │
 ```
 
 Les parties 1, 2 et 3 sont **totalement indépendantes** et peuvent démarrer immédiatement en parallèle.  
-Les parties 4 et 5 nécessitent que les hypothèses H0/H1 (Partie 3) soient formulées — prévoir 2 à 3 jours.
+Les parties 4 et 5 nécessitent que les hypothèses H0/H1 (Partie 3) soient formulées – prévoir 2 à 3 jours.
 
 ---
 
-## Partie 1 — Cadre de l'étude + nettoyage des données
+## Partie 1 – Cadre de l'étude + nettoyage des données
 
 **Responsable : Membre 1**  
 **Fichiers à modifier** : `rapport/sections/01_cadre.tex`, `data/README.md`  
@@ -57,7 +57,7 @@ Pour **chaque colonne** du CSV, préciser dans `data/README.md` :
 | ... | ... | ... | ... |
 
 Rappel des types (Déf. 1.3) :
-- **Qualitative** : modalités nommées (ex. : "Jamais", "Rarement"…) — peut être **ordinale** si les modalités ont un ordre naturel
+- **Qualitative** : modalités nommées (ex. : "Jamais", "Rarement"…) – peut être **ordinale** si les modalités ont un ordre naturel
 - **Quantitative** : valeur numérique, **discrète** (entiers) ou **continue** (réels)
 
 #### 1.4 Identifier les valeurs aberrantes et manquantes
@@ -76,16 +76,16 @@ Rappel des types (Déf. 1.3) :
 #### 1.6 Rédiger en LaTeX
 
 - Remplir `rapport/sections/01_cadre.tex` (section 1 du rapport)
-- Remplir `data/README.md` (dictionnaire complet des variables — utile pour tous les membres)
+- Remplir `data/README.md` (dictionnaire complet des variables – utile pour tous les membres)
 - Limiter à environ **0,5 page** dans le rapport final (contrainte des 4 pages)
 
 ---
 
-## Partie 2 — Statistiques descriptives (variables quantitatives)
+## Partie 2 – Statistiques descriptives (variables quantitatives)
 
 **Responsable : Membre 2**  
 **Fichiers à modifier** : `rapport/sections/04_analyse.tex` (sous-section 4.1), `rapport/figures/`  
-**Peut démarrer immédiatement** — s'appuyer sur `data/ADD_SC3_SC4.csv`.
+**Peut démarrer immédiatement** – s'appuyer sur `data/ADD_SC3_SC4.csv`.
 
 ### Étapes
 
@@ -98,8 +98,8 @@ Rappel des types (Déf. 1.3) :
 Pour chaque variable quantitative :
 
 - **Moyenne empirique** x̄ (Définition 1.4) : x̄ = (1/n) Σ xᵢ
-- **Médiane** Me (Définition 1.5) : valeur centrale après tri — si n pair : moyenne des rangs n/2 et n/2+1 ; si n impair : valeur au rang (n+1)/2 (Point méthode 1.1)
-- **Quartiles** Q1 et Q3 (Définition 1.6) — Point méthode 1.2
+- **Médiane** Me (Définition 1.5) : valeur centrale après tri – si n pair : moyenne des rangs n/2 et n/2+1 ; si n impair : valeur au rang (n+1)/2 (Point méthode 1.1)
+- **Quartiles** Q1 et Q3 (Définition 1.6) – Point méthode 1.2
 - **Mode** Mo (Définition 1.7)
 
 #### 2.3 Calculer les paramètres de dispersion (Chapitre 1 du cours)
@@ -125,7 +125,7 @@ Interpréter : |r| proche de 1 → forte corrélation linéaire ; r proche de 0 
 #### 2.5 Produire les représentations graphiques
 
 Pour chaque variable quantitative :
-- **Histogramme** (classes d'égale amplitude) — voir Figure 1.3 du cours pour l'exemple
+- **Histogramme** (classes d'égale amplitude) – voir Figure 1.3 du cours pour l'exemple
 - **Boîte à moustaches** (box-plot) avec Q1, Me, Q3, moustaches = min/max hors valeurs aberrantes
 
 Sauvegarder les figures en PNG ou PDF dans `rapport/figures/`. Exemple : `rapport/figures/hist_annales.png`.
@@ -147,7 +147,7 @@ Inclure dans LaTeX avec :
 
 ---
 
-## Partie 3 — Statistiques descriptives (qualitatives) + Formulation statistique
+## Partie 3 – Statistiques descriptives (qualitatives) + Formulation statistique
 
 **Responsable : Membre 3**  
 **Fichiers à modifier** : `rapport/sections/02_formulation.tex`, sous-section 4.2 de `04_analyse.tex`  
@@ -155,12 +155,12 @@ Inclure dans LaTeX avec :
 
 ### Étapes
 
-#### 3.1 Statistiques descriptives — variables qualitatives
+#### 3.1 Statistiques descriptives – variables qualitatives
 
 Pour chaque variable qualitative du sondage SC3/SC4 :
 
 - Construire le **tableau de fréquences** (effectifs nᵢ et fréquences fᵢ = nᵢ/n, Définition 1.8)
-- Identifier le **mode** Mo (Définition 1.7 — modalité la plus fréquente)
+- Identifier le **mode** Mo (Définition 1.7 – modalité la plus fréquente)
 - Produire un **diagramme à bâtons** ou **diagramme circulaire** selon la nature de la variable (voir Figure 1.2 du cours)
 - Sauvegarder les figures dans `rapport/figures/`
 
@@ -168,7 +168,7 @@ Pour chaque variable qualitative du sondage SC3/SC4 :
 
 Rédiger un court paragraphe expliquant pourquoi reformuler une question intuitive en termes de paramètres statistiques est nécessaire :
 - Une question comme "les étudiant·es qui dorment davantage ont-ils de meilleurs résultats ?" ne peut pas recevoir de réponse "vrai ou faux" directe sur un échantillon
-- Il faut définir un paramètre (proportion p ou moyenne µ), formuler H0/H1, et conclure au risque α — c'est la méthode scientifique (§ 3.3 du cours)
+- Il faut définir un paramètre (proportion p ou moyenne µ), formuler H0/H1, et conclure au risque α – c'est la méthode scientifique (§ 3.3 du cours)
 
 #### 3.3 Définir les paramètres d'intérêt
 
@@ -188,8 +188,8 @@ Pour **chaque test** envisagé, écrire :
 |---|---|---|---|---|
 | Test 1 | π = p₀ | π ≠ p₀ | Bilatéral | Conformité proportion |
 | Test 2 | m = µ₀ | m > µ₀ | Unilatéral | Conformité moyenne |
-| Test 3 | L₀ = L | L₀ ≠ L | — (unilatéral) | χ² de conformité |
-| Test 4 | X et Y indépendantes | X et Y dépendantes | — (unilatéral) | χ² d'indépendance |
+| Test 3 | L₀ = L | L₀ ≠ L | – (unilatéral) | χ² de conformité |
+| Test 4 | X et Y indépendantes | X et Y dépendantes | – (unilatéral) | χ² d'indépendance |
 
 **Définitions à appliquer** : Définition 3.1 (H0/H1), Définition 3.2 (unilatéral/bilatéral) du cours.
 
@@ -201,7 +201,7 @@ Pour **chaque test** envisagé, écrire :
 
 ---
 
-## Partie 4 — Méthodologie + Intervalles de confiance + Tests de conformité
+## Partie 4 – Méthodologie + Intervalles de confiance + Tests de conformité
 
 **Responsable : Membre 4**  
 **Fichiers à modifier** : `rapport/sections/03_methodologie.tex`, sous-sections 4.3 et 4.4 de `04_analyse.tex`  
@@ -226,7 +226,7 @@ Présenter un tableau récapitulatif :
 | χ² conformité | § 3.4.2 | χ²(k−1) | n≥50, nᵢ≥5 |
 | χ² indépendance | § 3.4.2 | χ²((k₁−1)(k₂−1)) | n≥50, nᵢⱼ≥5 |
 
-**Si les conditions ne sont pas réunies** (ce qui peut arriver avec n=72) : le signaler explicitement, présenter quand même le test en mentionnant la limite de validité — conformément à la consigne du professeur.
+**Si les conditions ne sont pas réunies** (ce qui peut arriver avec n=72) : le signaler explicitement, présenter quand même le test en mentionnant la limite de validité – conformément à la consigne du professeur.
 
 #### 4.2 Calculer les intervalles de confiance de la proportion
 
@@ -269,7 +269,7 @@ Présenter chaque test dans un cadre clair dans le rapport.
 
 ---
 
-## Partie 5 — Tests du χ² + Interprétation + Conclusion
+## Partie 5 – Tests du χ² + Interprétation + Conclusion
 
 **Responsable : Membre 5**  
 **Fichiers à modifier** : fin de `04_analyse.tex` (sous-section 4.5), `rapport/sections/05_interpretation.tex`  
@@ -330,7 +330,7 @@ Pour chaque test (parties 4 et 5), rédiger **une ou deux phrases** traduisant l
 - "Au risque de 5 %, on rejette H0 : il existe une association significative entre [X] et [Y]."
 - "Au risque de 5 %, on ne peut pas rejeter H0 : aucune association significative n'est mise en évidence entre [X] et [Y]."
 
-#### 5.4 Distinction association statistique / causalité — OBLIGATOIRE
+#### 5.4 Distinction association statistique / causalité – OBLIGATOIRE
 
 Ce point est **explicitement exigé par le sujet**. Développer pour chaque résultat significatif :
 

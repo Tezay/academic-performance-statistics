@@ -330,13 +330,12 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 
-# Fichiers système macOS
+# macOS system files
 .DS_Store
 
-# Ressources pédagogiques (PDFs trop lourds, matériel privé — partager hors GitHub)
+# Personal ressources
 ressources/
 
-# PDF compilé — artefact de build, à ne pas versionner (binaire, diff illisible)
-# Les figures PDF dans rapport/figures/ restent versionnées
+# pdf files generated
 rapport/*.pdf
 rapport/*.synctex.gz

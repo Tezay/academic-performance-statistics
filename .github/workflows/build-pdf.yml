@@ -1,0 +1,48 @@
+name: Compiler le rapport PDF
+
+# Déclenché uniquement quand des fichiers LaTeX changent, ou manuellement
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rapport/**'
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Compiler le PDF avec LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: rapport/main.tex
+          # latexmk lance pdflatex plusieurs fois automatiquement
+
+      - name: Sauvegarder comme artefact (30 jours)
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-pdf
+          path: rapport/main.pdf
+          retention-days: 30
+
+      - name: Mettre à jour la release "latest"
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "rapport/main.pdf"
+          artifactName: rapport.pdf
+          tag: latest
+          name: "Rapport — Dernière version compilée"
+          body: |
+            PDF compilé automatiquement depuis la branche `main`.
+
+            **Cliquez sur `rapport.pdf` ci-dessous pour télécharger.**
+          allowUpdates: true       # met à jour la release si elle existe déjà
+          removeArtifacts: true    # remplace l'ancien PDF par le nouveau
+          makeLatest: true
+          token: ${{ secrets.GITHUB_TOKEN }}

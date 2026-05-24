@@ -1,13 +1,17 @@
 # Facteurs influençant les résultats académiques des étudiant·es
 
-> Projet d'étude statistique — SM403 Analyse de données  
-> EFREI Paris — Cycle préparatoire P2 — Semestre de printemps 2026
+> Projet d'étude statistique – SM403 Analyse de données  
+> EFREI Paris – Cycle préparatoire P2 – Semestre de printemps 2026
+
+[![Compiler le rapport PDF](https://github.com/Tezay/academic-performance-statistics/actions/workflows/build-pdf.yml/badge.svg)](https://github.com/Tezay/academic-performance-statistics/actions/workflows/build-pdf.yml)
+&nbsp;
+**[⬇ Télécharger le rapport (PDF)](https://github.com/Tezay/academic-performance-statistics/releases/latest/download/rapport.pdf)**
 
 ---
 
 ## Contexte du projet
 
-Ce projet s'inscrit dans le module **SM403 — Introduction à l'Analyse de données**. L'objectif est d'analyser, à l'aide des outils de **statistiques inférentielles** vus en cours, les facteurs de la vie quotidienne susceptibles d'influencer les résultats académiques des étudiant·es de P1 à l'EFREI.
+Ce projet s'inscrit dans le module **SM403 – Introduction à l'Analyse de données**. L'objectif est d'analyser, à l'aide des outils de **statistiques inférentielles** vus en cours, les facteurs de la vie quotidienne susceptibles d'influencer les résultats académiques des étudiant·es de P1 à l'EFREI.
 
 La démarche :
 1. Un **sondage Google Forms** a été conçu par nos classes de P2, administré aux classes P1.
@@ -34,7 +38,7 @@ La démarche :
 1. **Installer MiKTeX** (distribution LaTeX pour Windows) :
    - Télécharger l'installateur sur [miktex.org/download](https://miktex.org/download)
    - Lancer l'installateur et choisir « Install for all users » (recommandé)
-   - Cocher **« Install missing packages on-the-fly: Yes »** — MiKTeX téléchargera automatiquement les packages manquants à la première compilation
+   - Cocher **« Install missing packages on-the-fly: Yes »** – MiKTeX téléchargera automatiquement les packages manquants à la première compilation
 
 2. **Installer TeXstudio** (éditeur) :
    - Télécharger sur [texstudio.org](https://www.texstudio.org/)
@@ -47,7 +51,7 @@ La démarche :
 
 ### Sur macOS
 
-**Option A — via Homebrew (recommandé si Homebrew est installé) :**
+**Option A – via Homebrew (recommandé si Homebrew est installé) :**
 ```bash
 # Installer MacTeX (distribution LaTeX complète, ~5 Go)
 brew install --cask mactex
@@ -56,7 +60,7 @@ brew install --cask mactex
 brew install --cask texstudio
 ```
 
-**Option B — installateurs graphiques :**
+**Option B – installateurs graphiques :**
 1. **MacTeX** : télécharger le `.pkg` sur [tug.org/mactex](https://www.tug.org/mactex/) et lancer l'installation
 2. **TeXstudio** : télécharger sur [texstudio.org](https://www.texstudio.org/) et glisser l'application dans `/Applications`
 
@@ -91,7 +95,7 @@ cd academic-performance-statistics
 - Le PDF généré s'affiche dans la visionneuse intégrée à droite
 - En cas d'erreur : consulter le panneau « Messages / Log »
 
-> La première compilation peut télécharger quelques packages (MiKTeX uniquement) — accepter les invitations.
+> La première compilation peut télécharger quelques packages (MiKTeX uniquement) – accepter les invitations.
 
 ### 4. Travailler sur une section
 
@@ -117,11 +121,11 @@ academic-performance-statistics/
 │   ├── main.tex                # Fichier maître (à compiler)
 │   ├── preambule.tex           # Packages et macros LaTeX
 │   ├── sections/
-│   │   ├── 01_cadre.tex        # Section 1 — Cadre de l'étude
-│   │   ├── 02_formulation.tex  # Section 2 — Formulation statistique
-│   │   ├── 03_methodologie.tex # Section 3 — Choix méthodologiques
-│   │   ├── 04_analyse.tex      # Section 4 — Analyse des données
-│   │   └── 05_interpretation.tex # Section 5 — Interprétation
+│   │   ├── 01_cadre.tex        # Section 1 – Cadre de l'étude
+│   │   ├── 02_formulation.tex  # Section 2 – Formulation statistique
+│   │   ├── 03_methodologie.tex # Section 3 – Choix méthodologiques
+│   │   ├── 04_analyse.tex      # Section 4 – Analyse des données
+│   │   └── 05_interpretation.tex # Section 5 – Interprétation
 │   ├── figures/                # Graphiques générés (PNG/PDF)
 │   └── annexes/                # Fichiers d'annexes .tex
 │
