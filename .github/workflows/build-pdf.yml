@@ -39,7 +39,7 @@ jobs:
         with:
           artifacts: "rapport/rapport-performance-academique-efrei.pdf"
           tag: latest
-          name: "Rapport — Dernière version compilée"
+          name: "Rapport – Dernière version compilée"
           body: |
             PDF compilé automatiquement depuis la branche `main`.
 

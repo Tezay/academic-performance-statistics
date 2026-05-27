@@ -1,24 +1,93 @@
 % ============================================================
 %  Section 4.1 – Statistiques descriptives (variables quantitatives)
-% ============================================================
-%
-%  Pour chaque variable quantitative du sondage ADD_SC3_SC4.csv :
-%
-%  - Moyenne empirique x̄  (Déf. 1.4) : x̄ = (1/n) Σ xᵢ
-%  - Médiane Me            (Déf. 1.5 + Point méthode 1.1)
-%  - Quartiles Q1, Q3      (Déf. 1.6 + Point méthode 1.2)
-%  - Mode Mo               (Déf. 1.7)
-%  - Fréquences fi         (Déf. 1.8) : fi = ni/n
-%  - Variance σ²           (Déf. 1.9) : σ² = x̄² − x̄²
-%  - Écart-type σ          (Déf. 1.9)
-%  - Coefficient de corrélation r avec la variable de performance (Déf. 1.16)
-%
-%  Représentations graphiques → sauvegarder dans rapport/figures/
-%  - Histogramme par variable
-%  - Boîte à moustaches (Q1, Me, Q3)
-%
+%  Responsable : Membre 2
+%  Formules : Chapitre 1 du cours SM403
 % ============================================================
 
-\subsection{Statistiques descriptives --- variables quantitatives}
+\subsection{Statistiques descriptives -- variables quantitatives}
 
-% TODO : tableaux et figures
+La seule variable quantitative retenue est \textbf{V2 : Annales travaillées}
+
+% ── Tableau paramètres ──────────────────────────────────────────────────────
+\begin{table}[H]
+  \centering
+  \caption{Paramètres descriptifs de V2 : Annales travaillées (\(n = 68\))}
+  \label{tab:desc_v2}
+  \resizebox{\linewidth}{!}{%
+  \begin{tabular}{@{}lccccccccc@{}}
+    \toprule
+    & \(\bar{x}\) & \(M_e\) & \(Q_1\) & \(Q_3\) & \(M_o\)
+    & \(\sigma^2\) & \(\sigma\) & \(S_e^2\) & \(S_e\) \\
+    \midrule
+    Référence
+    & Déf.~1.4 & Déf.~1.5, PM~1.1 & Déf.~1.6, PM~1.2 & Déf.~1.6, PM~1.2 & Déf.~1.7
+    & Déf.~1.9 & Déf.~1.9 & §\,2.3.1 & §\,2.3.1 \\
+    Valeur
+    & \(2{,}1912\) & \(2\) & \(2\) & \(3\) & \(2\)
+    & \(0{,}7723\) & \(0{,}8788\) & \(0{,}7838\) & \(0{,}8853\) \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
+
+\noindent\textbf{Calculs détaillés.}
+\begin{itemize}
+  \item \(\bar{x} = \tfrac{1}{68}\sum x_i \approx 2{,}1912\) \emph{(Déf.~1.4)}
+  \item \(M_e\) : \(n = 68\) pair \(\Rightarrow M_e = \tfrac{x_{(34)} + x_{(35)}}{2} = \tfrac{2+2}{2} = 2\)
+        \emph{(Déf.~1.5, PM~1.1)}
+  \item \(Q_1\) : \(n \equiv 0 \pmod{4}\) \(\Rightarrow Q_1 = \tfrac{x_{(17)} + x_{(18)}}{2} = \tfrac{2+2}{2} = 2\)
+        \emph{(Déf.~1.6, PM~1.2)}
+  \item \(Q_3 = \tfrac{x_{(51)} + x_{(52)}}{2} = \tfrac{3+3}{2} = 3\)
+  \item \(\sigma^2 = \overline{x^2} - \bar{x}^2 = \tfrac{1}{68}\sum x_i^2 - (2{,}1912)^2 \approx 0{,}7723\)
+        \emph{(Déf.~1.9)}
+  \item \(S_e^2 = \tfrac{n}{n-1}\,\sigma^2 = \tfrac{68}{67}\times 0{,}7723 \approx 0{,}7838\)
+        \emph{(§\,2.3.1)}
+\end{itemize}
+
+% ── Tableau de fréquences ───────────────────────────────────────────────────
+\begin{table}[H]
+  \centering
+  \caption{Tableau de fréquences de V2 (Déf.~1.8 : \(f_i = n_i/n\))}
+  \label{tab:freq_v2}
+  \small
+  \begin{tabular}{@{}lrrrrr@{}}
+    \toprule
+    Valeur        & 0      & 1      & 2      & 3      & 4+ \\
+    \midrule
+    \(n_i\)       & 1      & 12     & 34     & 15     & 6  \\
+    \(f_i\) (\%)  & 1{,}5  & 17{,}6 & 50{,}0 & 22{,}1 & 8{,}8 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+La distribution est fortement concentrée sur la valeur~2
+(\(f_2 = 50\,\%\), \(M_e = Q_1 = M_o = 2\)).
+L'écart interquartile \(\text{EIQ} = Q_3 - Q_1 = 1\) nous montre qu'on a une faible dispertion.
+
+% ── Figures ─────────────────────────────────────────────────────────────────
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.54\textwidth}
+    \includegraphics[width=\textwidth]{figures/hist_v2.pdf}
+    \caption{Histogramme}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.36\textwidth}
+    \includegraphics[width=\textwidth]{figures/box_v2.pdf}
+    \caption{Boîte à moustaches}
+  \end{subfigure}
+  \caption{Distribution de V2 -- Annales travaillées (\(n = 68\))}
+  \label{fig:v2}
+\end{figure}
+
+% ── Corrélation ─────────────────────────────────────────────────────────────
+\paragraph{Corrélation avec la performance académique (Déf.~1.16).}
+
+On calcule le coefficient de corrélation linéaire entre V2 et V12
+(note de bac, recodée numériquement 2--5, sur \(n = 67\) paires valides) :
+\[
+  r(V2,\,V12)
+  = \frac{\operatorname{Cov}(V2,\,V12)}{\sigma_{V2}\times\sigma_{V12}}
+  \approx 0{,}045
+\]
+\(\lvert r \rvert \approx 0\) : \textbf{absence de corrélation linéaire}
+entre le nombre d'annales travaillées et la note de bac (Déf.~1.16).
