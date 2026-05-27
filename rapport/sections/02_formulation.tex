@@ -1,40 +1,68 @@
 % ============================================================
 %  Section 2 – Formulation statistique du problème
-% ============================================================
-%
-%  Contenu attendu (voir sujet PDF) :
-%
-%  2.1 Intérêt de la formulation statistique
-%      - Expliquer pourquoi reformuler en termes de paramètres (p, µ)
-%        plutôt que répondre "vrai/faux" à une question intuitive
-%      - Lien avec la méthode scientifique (§ 3.3 du cours)
-%
-%  2.2 Paramètres d'intérêt
-%      - Identifier les paramètres testés : proportions π ou moyennes m
-%      - Exemple : "la proportion d'étudiant·es dormant < 6h avant un DE"
-%      - Exemple : "la moyenne de notes de bac en sciences"
-%
-%  2.3 Formulation des hypothèses statistiques
-%      - Écrire H0 et H1 pour chaque test envisagé (≥ 3 tests distincts)
-%      - Préciser si bilatéral ou unilatéral (Déf. 3.2 du cours)
-%      - Indiquer le type de test associé :
-%          · conformité de proportion → critère z (§ 3.4.1)
-%          · conformité de moyenne   → critère t Student (§ 3.4.1)
-%          · χ² de conformité        → critère χ² (§ 3.4.2)
-%          · χ² d'indépendance       → critère χ² (§ 3.4.2)
-%
+%  Responsable : Membre 3
+%  Formules : Chapitres 2 et 3 du cours SM403
 % ============================================================
 
 \section{Formulation statistique du problème}
 
 \subsection{Intérêt de la formulation statistique}
 
-% TODO : rédiger ici
+Sur un échantillon, on ne peut pas conclure directement à \og{}vrai\fg{} ou
+\og{}faux\fg{} : les résultats varient d'un tirage à l'autre.
+On traduit donc chaque question en hypothèse testable ($H_0$ contre $H_1$) et on
+conclut à un risque $\alpha = 5\,\%$ fixé à l'avance (§\,3.3 du cours).
 
 \subsection{Paramètres d'intérêt}
 
-% TODO : rédiger ici
+Trois paramètres sont testés dans cette étude :
+
+\begin{itemize}
+  \item $\pi_1$ : proportion d'étudiants dormant moins de 7~h avant un DE
+        (V6 -- modalités 1+2+3) ;
+  \item $\pi_2$ : proportion d'étudiants assistant à tous les CMs
+        (V14 -- modalité \og{}Tous\fg{}) ;
+  \item $m$ : nombre moyen d'annales travaillées avant CE/DE (V2).
+\end{itemize}
 
 \subsection{Hypothèses statistiques}
 
-% TODO : tableau récapitulatif H0 / H1 / type de test / bilatéral ou unilatéral
+Le tableau~\ref{tab:hypotheses} résume les six tests retenus.
+
+\begin{table}[H]
+  \centering
+  \caption{Récapitulatif des hypothèses statistiques (\(\alpha = 5\,\%\))}
+  \label{tab:hypotheses}
+  \footnotesize
+  \resizebox{\linewidth}{!}{%
+  \begin{tabular}{@{}cllll@{}}
+    \toprule
+    Test & $H_0$ & $H_1$ & Type de test & Réf. \\
+    \midrule
+    T1 & $\pi_1 = 0{,}50$
+       & $\pi_1 \neq 0{,}50$
+       & Conformité proportion -- bilatéral
+       & §\,3.4.1 \\
+    T2 & $\pi_2 = 1/3$
+       & $\pi_2 > 1/3$
+       & Conformité proportion -- unilatéral supérieur
+       & §\,3.4.1 \\
+    T3 & $m = 2$
+       & $m \neq 2$
+       & Conformité moyenne (Student) -- bilatéral
+       & §\,3.4.1 \\
+    T4 & V12 $\sim$ loi uniforme
+       & V12 $\not\sim$ loi uniforme
+       & $\chi^2$ de conformité
+       & §\,3.4.2 \\
+    T5 & V2 $\perp$ V14
+       & V2 $\not\perp$ V14
+       & $\chi^2$ d'indépendance (SC3/SC4)
+       & §\,3.4.2 \\
+    T6 & Perm. $\perp$ Moy.\,S1
+       & Perm. $\not\perp$ Moy.\,S1
+       & $\chi^2$ d'indépendance (SC5/SC6)
+       & §\,3.4.2 \\
+    \bottomrule
+  \end{tabular}}
+\end{table}

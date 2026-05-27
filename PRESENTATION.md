@@ -86,10 +86,8 @@ Conclusions – au risque α = 5 %
 
 **Contenu visuel :**
 - Histogramme de V2 (0, 1, 2, 3, 4+) – `rapport/figures/`
-- Tableau : x̄ ≈ 2,19 | Me = 2 | Mo = 2 | σ ≈ 0,84
-- Boîte à moustaches
-
-*[À compléter par Membre 2 – Section 4.1]*
+- Tableau : x̄ ≈ 2,19 | Me = 2 | Mo = 2 | σ ≈ 0,88 | IC₉₅% = [1,98 ; 2,41]
+- Boîte à moustaches (1 valeur aberrante à 0)
 
 ---
 
@@ -101,11 +99,9 @@ Conclusions – au risque α = 5 %
 **Contenu visuel :**
 - 3 diagrammes en barres (V6, V12, V14) côte à côte
 - Principales fréquences :
-  - V6 : 81 % dorment < 7h (modalités 1+2+3)
-  - V12 : 57 % ont 12–14 de moyenne au bac (modalité 3)
-  - V14 : 43 % assistent à tous les CMs (modalité 3)
-
-*[À compléter par Membre 3 – Section 4.2]*
+  - V6 : Mo = 4–6 h | 80,9 % dorment < 7 h (n=55/68)
+  - V12 : Mo = 12–14 | 58,2 % (n=39/67, anomalie exclue)
+  - V14 : Mo = Presque tous | 42,6 % assistent à tous les CMs (n=29/68)
 
 ---
 
@@ -129,7 +125,13 @@ Conclusions – au risque α = 5 %
 ## Diapo 8 – Tests de conformité
 
 **Accroche orale :**
-> *"On passe aux tests. On applique la méthodologie en 5 étapes du cours – H0, distribution sous H0, région critique, critère, conclusion."*
+> *"On passe aux tests. On applique la méthodologie en 5 étapes du cours – H0, distribution sous H0, région critique, critère, conclusion. Mais avant ça, pourquoi ces valeurs de référence ?"*
+
+**Justification des H₀ (à l'oral) :**
+- T1 (π = 0,50) : on veut savoir si la *majorité* dort insuffisamment — le seuil naturel est la moitié
+- T2 (π = 1/3) : si les 3 modalités de V14 étaient équiréparties, on attendrait 1/3 dans chacune
+- T3 (m = 2) : 2 est à la fois le mode et la médiane de V2 — valeur centrale observée
+- T4 (loi uniforme) : référence naturelle en l'absence de distribution théorique connue pour V12
 
 **Contenu visuel :**
 
@@ -154,12 +156,12 @@ Conclusions – au risque α = 5 %
 
 **Contenu visuel :**
 
-| Test | Variables | χ²_obs | Seuil | Conclusion |
+| Test | Variables | χ²_obs | Seuil (ddl=1) | Conclusion |
 |---|---|---|---|---|
-| χ² (SC3/SC4) | V12 × V2 | – | – | – |
-| χ² (SC3/SC4) | V12 × V14 | – | – | – |
-| χ² (SC5/SC6) | Permanences × Moy. S1 | – | – | – |
-| χ² (SC5/SC6) | Fréq. CMs × Note Analyse 1 | – | – | – |
+| T5 — χ² ind. (SC3/SC4) | V2 × V14 | 0,26 | 3,841 | Non-rejet H₀ |
+| T6 — χ² ind. (SC5/SC6) | Permanences × Moy. S1 | 3,95 | 3,841 | Rejet H₀ |
+
+> *Note : les tests V12×V2 et V12×V14 ont été abandonnés — conditions de validité non satisfaites (effectifs théoriques < 5 dans plusieurs cellules, §3.4.2).*
 
 - Formule : χ² = ΣΣ (o_{i,j} − n_{i,j})² / n_{i,j} – *§3.4.2*
 - ddl = (k₁−1)(k₂−1)
