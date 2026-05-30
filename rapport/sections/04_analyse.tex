@@ -9,3 +9,80 @@
 \input{sections/04c_intervalles}          % Membre 4
 \input{sections/04d_conformite}           % Membre 4
 \input{sections/04e_chi2}                 % Membre 5
+ \subsection{Tests du $\chi^2$}
+
+\paragraph{T4 -- Conformité de V12.}
+On teste
+$H_0:$ V12 suit une loi uniforme contre $H_1:$ V12 ne suit pas une loi uniforme.
+Avec $n=67$ et 4 modalités, les effectifs théoriques valent $16{,}75$.
+Les conditions sont vérifiées ($n\ge 50$, $np=16{,}75\ge5$).
+Pour $\alpha=5\,\%$ et $\nu=3$, $\chi^2_{3;0.05}=7.815$.
+
+\begin{center}\small
+	\begin{tabular}{lcccc}
+		\toprule
+		Modalité & 8--11 & 12--14 & 15--17 & 18--20\\
+		\midrule
+		$o_i$ & 13 & 39 & 12 & 3\\
+		$n_i$ & 16.75 & 16.75 & 16.75 & 16.75\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+$\chi^2_{\mathrm{obs}}\approx43.03>7.815$.
+On rejette donc $H_0$ : V12 ne suit pas une loi uniforme.
+
+\paragraph{T5 -- Indépendance Annales travaillées/Assiduité aux CMs.}
+Impossible car les conditions de validité ne sont pas conformes.
+
+\paragraph{T6 -- Indépendance participation extra-scolaire / moyenne S1.}
+
+Après regroupement des modalités :
+$H_0 : V_A \perp V_B$ contre $H_1 : V_A \not\perp V_B$.
+
+\begin{center}
+	\footnotesize
+	
+	\begin{minipage}{0.47\linewidth}
+		\centering
+		\textbf{Effectifs observés}
+		
+		\medskip
+		
+		\begin{tabular}{lccc}
+			\toprule
+			$V_B/V_A$ & 7--10 & 11--13 & 14--16\\
+			\midrule
+			1/mois ou moins & 9 & 10 & 4\\
+			1/semaine & 10 & 10 & 10\\
+			Plusieurs/semaine & 6 & 16 & 8\\
+			\bottomrule
+		\end{tabular}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.47\linewidth}
+		\centering
+		\textbf{Effectifs théoriques}
+		
+		\medskip
+		
+		\begin{tabular}{lccc}
+			\toprule
+			$V_B/V_A$ & 7--10 & 11--13 & 14--16\\
+			\midrule
+			1/mois ou moins & 6.92 & 9.98 & 6.10\\
+			1/semaine & 9.04 & 13.01 & 7.95\\
+			Plusieurs/semaine & 9.04 & 13.01 & 7.95\\
+			\bottomrule
+		\end{tabular}
+	\end{minipage}
+	
+\end{center}
+
+Tous les effectifs théoriques sont supérieurs à 5. Avec
+$\nu=(3-1)(3-1)=4$, $\chi^2_{4;0.05}=9.488$ et
+$\chi^2_{\mathrm{obs}}\approx4.375<9.488$.
+
+On ne rejette pas $H_0$ au seuil de $5\,\%$ : aucune dépendance significative
+n'est mise en évidence entre la fréquence de participation extra-scolaire et la
+moyenne obtenue au semestre~1.
