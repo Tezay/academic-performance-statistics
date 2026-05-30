@@ -26,12 +26,67 @@
 
 \subsection{Outils d'inférence retenus}
 
-% TODO : rédiger ici
+Les outils d'inférence sont choisis en fonction de la nature des variables étudiées et de la question statistique posée. Le risque de première espèce est fixé à $\alpha = 5~\%$ pour l'ensemble des tests. Cela signifie que l'on accepte un risque de 5~\% de rejeter l'hypothèse nulle $H_0$ alors qu'elle est vraie.
+
+Pour les proportions, nous utilisons des intervalles de confiance de proportion et des tests de conformité d'une proportion. C'est le cas pour T1, qui étudie la proportion d'étudiant·es dormant moins de 7 heures avant un DE, et pour T2, qui étudie la proportion d'étudiant·es assistant à tous les cours magistraux. Ces deux paramètres sont des proportions, notées respectivement $\pi_1$ et $\pi_2$.
+
+Pour le nombre moyen d'annales travaillées avant un CE ou un DE, nous utilisons un intervalle de confiance de la moyenne et un test de conformité d'une moyenne. En effet, la variable V2 est traitée comme une variable quantitative discrète et le paramètre étudié est une moyenne, notée $m$. Comme l'écart-type de la population n'est pas connu, on utilise l'écart-type estimé à partir des données et la loi de Student.
+
+Pour les variables qualitatives à plusieurs modalités, nous utilisons des tests du $\chi^2$. Le test T4 est un test du $\chi^2$ de conformité, car il compare la distribution observée de la variable V12, moyenne au bac en spécialités scientifiques, à une loi théorique uniforme. Les tests T5 et T6 sont des tests du $\chi^2$ d'indépendance, car ils étudient l'existence éventuelle d'une association entre deux variables. T5 porte sur le lien entre le nombre d'annales travaillées et l'assiduité aux cours magistraux. T6 porte sur le lien entre la fréquence de participation extra-scolaire et la moyenne obtenue au semestre 1.
+
+Ainsi, les tests de conformité sont utilisés lorsqu'une variable est comparée à une valeur ou à une loi de référence, tandis que les tests d'indépendance sont utilisés lorsqu'on cherche à savoir si deux variables sont statistiquement associées.
 
 \subsection{Vérification des conditions de validité}
 
-% TODO : tableau : test | condition | valeur observée | validée ?
+Avant d'interpréter les résultats, les conditions de validité des outils utilisés doivent être vérifiées. Le tableau suivant récapitule les conditions associées à chaque test.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{1.1cm}p{4.3cm}p{4.6cm}p{1.8cm}}
+\toprule
+Test & Condition de validité & Valeur observée & Validité \\
+\midrule
+T1 & Test de proportion : $n \geq 30$, $np_0 \geq 5$, $n(1-p_0) \geq 5$
+& $n=68$, $p_0=0{,}50$, donc $np_0=34$ et $n(1-p_0)=34$
+& Oui \\
+\midrule
+T2 & Test de proportion : $n \geq 30$, $np_0 \geq 5$, $n(1-p_0) \geq 5$
+& $n=68$, $p_0=1/3$, donc $np_0 \approx 22{,}7$ et $n(1-p_0) \approx 45{,}3$
+& Oui \\
+\midrule
+T3 & Test de moyenne : $n \geq 30$
+& $n=68$
+& Oui \\
+\midrule
+T4 & $\chi^2$ de conformité : $n \geq 50$ et effectifs théoriques $\geq 5$
+& $n=67$ et effectifs théoriques $n_i=16{,}75$ pour chaque modalité
+& Oui \\
+\midrule
+T5 & $\chi^2$ d'indépendance : $n \geq 50$ et effectifs théoriques $n_{ij} \geq 5$
+& Conditions non conformes : certains effectifs théoriques sont inférieurs à 5
+& Non \\
+\midrule
+T6 & $\chi^2$ d'indépendance : $n \geq 50$ et effectifs théoriques $n_{ij} \geq 5$
+& Tous les effectifs théoriques sont supérieurs à 5
+& Oui \\
+\bottomrule
+\end{tabular}
+\caption{Vérification des conditions de validité des tests}
+\end{table}
+
+Les conditions de validité sont donc vérifiées pour T1, T2, T3, T4 et T6. En revanche, elles ne sont pas vérifiées pour T5. Le test d'indépendance entre le nombre d'annales travaillées et l'assiduité aux cours magistraux ne peut donc pas être interprété rigoureusement avec le test du $\chi^2$. Il est préférable de signaler cette limite plutôt que de conclure à tort à une indépendance ou à une dépendance entre ces deux variables.
 
 \subsection{Justification loi normale vs loi de Student}
 
-% TODO : rédiger ici
+Le choix entre la loi normale et la loi de Student dépend principalement du paramètre étudié et de la connaissance ou non de l'écart-type de la population.
+
+Pour les tests de proportion T1 et T2, on utilise l'approximation normale centrée réduite $\mathcal{N}(0,1)$. Cette approximation est justifiée car les effectifs sont suffisamment grands et les conditions $np_0 \geq 5$ et $n(1-p_0) \geq 5$ sont vérifiées.
+
+Pour le test de moyenne T3, l'écart-type réel de la population n'est pas connu. On l'estime donc à partir des données observées avec la variance estimée :
+\[
+S_e^2 = \frac{n}{n-1}\sigma^2_{\text{obs}}.
+\]
+Dans ce cas, le critère de test suit une loi de Student à $n-1$ degrés de liberté. Comme $n=68$, on utilise donc une loi de Student à $67$ degrés de liberté.
+
+Enfin, pour les tests T4, T5 et T6, les variables étudiées sont qualitatives ou regroupées en modalités. On utilise donc la loi du $\chi^2$. Pour T4, il s'agit d'un test du $\chi^2$ de conformité, avec $k-1$ degrés de liberté. Pour T5 et T6, il s'agit de tests du $\chi^2$ d'indépendance, avec $(k_1-1)(k_2-1)$ degrés de liberté.
