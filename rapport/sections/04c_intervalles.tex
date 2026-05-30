@@ -1,23 +1,78 @@
 % ============================================================
 %  Section 4.3 – Intervalles de confiance
 % ============================================================
-%
-%  IC de la proportion (Déf. 2.11) :
-%      IC = p0 ± sqrt(p0(1−p0)/n) × zα
-%      Conditions : n≥30, np0≥5, n(1−p0)≥5
-%      zα lu dans la table de la loi Normale (Annexe 5.2 du cours)
-%
-%  IC de la moyenne (Déf. 2.14, loi de Student) :
-%      IC = x̄ ± (σe/√n) × t_{n−1,α}
-%      avec σe = sqrt(Se²) et Se² = n/(n−1) × σ²obs  (§ 2.3.1)
-%      t_{n−1,α} lu dans la table de Student bilatérale (Annexe 5.1 du cours)
-%      Condition : n≥30
-%
-%  Pour chaque IC : préciser le risque α, la confiance 1−α,
-%  vérifier les conditions de validité, interpréter en langage courant.
-%
-% ============================================================
 
 \subsection{Intervalles de confiance}
 
-% TODO : calculs et interprétation
+On construit trois intervalles de confiance au niveau $1-\alpha = 95\,\%$
+($\alpha = 5\,\%$).
+Les conditions de validité sont vérifiées pour chacun avant d'appliquer la formule.
+
+% ── IC π1 ───────────────────────────────────────────────────────────────────
+\paragraph{IC de la proportion $\pi_1$ -- sommeil insuffisant avant un DE (V6).}
+
+\textit{Paramètre d'intérêt} : $\pi_1 = P(\text{étudiant·e dort} < 7\,\text{h avant un DE})$
+(modalités 1, 2, 3 de V6).
+
+\textit{Conditions} (Déf.~2.11) : $n = 68 \geq 30$ {\checkmark},
+$n\hat{p}_1 = 55 \geq 5$ {\checkmark}, $n(1-\hat{p}_1) = 13 \geq 5$ {\checkmark}.
+
+\[
+  \hat{p}_1 = \frac{55}{68} \approx 0{,}8088
+  \qquad
+  \text{IC}_{95\%}(\pi_1)
+  = \hat{p}_1 \pm z_{0{,}025}\sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n}}
+  = 0{,}8088 \pm 1{,}96 \times 0{,}0477
+  \approx \boldsymbol{[0{,}7154\,;\,0{,}9023]}
+\]
+
+\textit{Interprétation} : on estime, avec un niveau de confiance de 95\,\%, qu'entre
+71,5\,\% et 90,2\,\% des étudiant·es dorment moins de 7~heures la nuit précédant un DE.
+
+% ── IC π2 ───────────────────────────────────────────────────────────────────
+\paragraph{IC de la proportion $\pi_2$ -- assiduité totale aux CMs (V14).}
+
+\textit{Paramètre d'intérêt} : $\pi_2 = P(\text{étudiant·e assiste à tous les CMs})$
+(modalité « Tous les CMs » de V14).
+
+\textit{Conditions} : $n = 68 \geq 30$ {\checkmark},
+$n\hat{p}_2 = 29 \geq 5$ {\checkmark}, $n(1-\hat{p}_2) = 39 \geq 5$ {\checkmark}.
+
+\[
+  \hat{p}_2 = \frac{29}{68} \approx 0{,}4265
+  \qquad
+  \text{IC}_{95\%}(\pi_2)
+  = 0{,}4265 \pm 1{,}96 \times 0{,}0600
+  \approx \boldsymbol{[0{,}3089\,;\,0{,}5440]}
+\]
+
+\textit{Interprétation} : on estime qu'entre 30,9\,\% et 54,4\,\% des étudiant·es
+assistent à tous leurs cours magistraux.
+La valeur $1/3$ (référence du test T2) appartient à cet intervalle, ce qui
+anticipe le résultat du test de conformité.
+
+% ── IC m ────────────────────────────────────────────────────────────────────
+\paragraph{IC de la moyenne $m$ -- annales travaillées avant CE/DE (V2).}
+
+\textit{Paramètre d'intérêt} : $m = $ nombre moyen d'annales travaillées.
+
+\textit{Conditions} (Déf.~2.14) : $n = 68 \geq 30$ {\checkmark} ;
+$\sigma$ inconnue $\Rightarrow$ on utilise $S_e$ et la loi de Student
+$\mathcal{T}(n-1) = \mathcal{T}(67)$ (§\,2.3.1).
+
+\[
+  \bar{x} \approx 2{,}1912,\quad
+  S_e \approx 0{,}8853,\quad
+  t_{67\,;\,0{,}025} \approx 1{,}9960
+\]
+\[
+  \text{IC}_{95\%}(m)
+  = \bar{x} \pm t_{67\,;\,0{,}025}\,\frac{S_e}{\sqrt{n}}
+  = 2{,}1912 \pm 1{,}9960 \times 0{,}1074
+  \approx \boldsymbol{[1{,}977\,;\,2{,}406]}
+\]
+
+\textit{Interprétation} : en moyenne, les étudiant·es travaillent entre
+1,98 et 2,41 annales avant un examen, avec un niveau de confiance de 95\,\%.
+La valeur $m_0 = 2$ appartient à cet intervalle : le test de conformité T3
+ne devrait pas rejeter $H_0$.

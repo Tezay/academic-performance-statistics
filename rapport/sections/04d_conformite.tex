@@ -1,26 +1,99 @@
 % ============================================================
 %  Section 4.4 – Tests de conformité
 % ============================================================
-%
-%  Appliquer la méthodologie en 5 étapes (§ 3.2.2 du cours) pour chaque test :
-%
-%  Étape 1 : Définir H0 et H1 (reprendre § 02_formulation.tex)
-%  Étape 2 : Distribution de la statistique sous H0
-%             - Proportion : N(0,1) si n≥30, np≥5, n(1−p)≥5
-%             - Moyenne    : T(n−1) si n≥30 (variance σ inconnue)
-%  Étape 3 : Région critique
-%             - Bilatéral  : intervalle [−zα ; +zα] ou [−t_{n−1,α} ; +t_{n−1,α}]
-%             - Unilatéral : seuil z2α ou t_{n−1,2α}
-%  Étape 4 : Valeur du critère
-%             - Proportion : z = (p0 − p) / sqrt(p(1−p)/n)
-%             - Moyenne    : t = (x̄ − µ) / (σe/√n)
-%  Étape 5 : Conclusion (rejeter ou ne pas rejeter H0)
-%
-%  Si les conditions ne sont pas réunies : le mentionner explicitement
-%  et présenter le test quand même (consigne du professeur).
-%
-% ============================================================
 
 \subsection{Tests de conformité}
 
-% TODO : appliquer la méthodologie en 5 étapes pour chaque test
+Pour chaque test, on applique la méthodologie en 5~étapes du cours (§\,3.2.2).
+Le risque est fixé à $\alpha = 5\,\%$.
+
+% ── T1 ──────────────────────────────────────────────────────────────────────
+\paragraph{T1 -- Proportion d'étudiant·es dormant moins de 7~h avant un DE.}
+
+\textbf{Étape~1 -- Hypothèses.}
+$H_0 : \pi_1 = 0{,}50$ contre $H_1 : \pi_1 \neq 0{,}50$ (bilatéral).
+
+\textbf{Étape~2 -- Distribution sous $H_0$.}
+Les conditions (§\,3.4.1) sont vérifiées : $n = 68 \geq 30$,
+$np_0 = 34 \geq 5$, $n(1-p_0) = 34 \geq 5$.
+Sous $H_0$, la statistique de test suit approximativement $\mathcal{N}(0,1)$.
+
+\textbf{Étape~3 -- Région critique.}
+Test bilatéral à $\alpha = 5\,\%$ : $RC = \left]-\infty\,;\,-1{,}96\right] \cup \left[1{,}96\,;\,+\infty\right[$.
+
+\textbf{Étape~4 -- Valeur du critère.}
+\[
+  z_\text{obs}
+  = \frac{\hat{p}_1 - p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}
+  = \frac{0{,}8088 - 0{,}50}{\sqrt{\dfrac{0{,}50 \times 0{,}50}{68}}}
+  = \frac{0{,}3088}{0{,}0606}
+  \approx \mathbf{5{,}09}
+\]
+
+\textbf{Étape~5 -- Conclusion.}
+$z_\text{obs} = 5{,}09 \in RC$ : on \textbf{rejette $H_0$} au risque $5\,\%$.
+La proportion d'étudiant·es dormant moins de 7~heures avant un DE est
+significativement différente de 50\,\%.
+
+% ── T2 ──────────────────────────────────────────────────────────────────────
+\paragraph{T2 -- Proportion d'étudiant·es assistant à tous les CMs.}
+
+\textbf{Étape~1 -- Hypothèses.}
+$H_0 : \pi_2 = 1/3$ contre $H_1 : \pi_2 > 1/3$ (unilatéral supérieur).
+
+\textbf{Étape~2 -- Distribution sous $H_0$.}
+$n = 68 \geq 30$, $np_0 = 68/3 \approx 22{,}7 \geq 5$,
+$n(1-p_0) \approx 45{,}3 \geq 5$ {\checkmark}.
+Sous $H_0$, la statistique suit approximativement $\mathcal{N}(0,1)$.
+
+\textbf{Étape~3 -- Région critique.}
+Test unilatéral supérieur à $\alpha = 5\,\%$ :
+$RC = \left[z_{0{,}05}\,;\,+\infty\right[ = \left[1{,}6449\,;\,+\infty\right[$.
+
+\textbf{Étape~4 -- Valeur du critère.}
+\[
+  z_\text{obs}
+  = \frac{\hat{p}_2 - p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}
+  = \frac{0{,}4265 - 0{,}3333}{\sqrt{\dfrac{0{,}3333 \times 0{,}6667}{68}}}
+  = \frac{0{,}0931}{0{,}0572}
+  \approx \mathbf{1{,}63}
+\]
+
+\textbf{Étape~5 -- Conclusion.}
+$z_\text{obs} = 1{,}63 \notin RC$ (car $1{,}63 < 1{,}6449$) :
+on \textbf{ne rejette pas $H_0$} au risque $5\,\%$.
+On ne peut pas affirmer, sur cet échantillon, que la proportion d'étudiant·es
+assistant à tous les CMs est significativement supérieure à $1/3$.
+
+\textit{Remarque} : la valeur est très proche du seuil ($1{,}63 \approx 1{,}64$) ;
+la conclusion serait fragile face à une légère variation de l'échantillon.
+
+% ── T3 ──────────────────────────────────────────────────────────────────────
+\paragraph{T3 -- Nombre moyen d'annales travaillées (V2).}
+
+\textbf{Étape~1 -- Hypothèses.}
+$H_0 : m = 2$ contre $H_1 : m \neq 2$ (bilatéral).
+
+\textbf{Étape~2 -- Distribution sous $H_0$.}
+$\sigma$ inconnue $\Rightarrow$ on utilise $S_e$ : sous $H_0$,
+la statistique de Student suit $\mathcal{T}(n-1) = \mathcal{T}(67)$ (§\,3.4.1).
+Condition : $n = 68 \geq 30$ {\checkmark}.
+
+\textbf{Étape~3 -- Région critique.}
+Test bilatéral : $RC = \left]-\infty\,;\,-t_{67\,;\,0{,}025}\right] \cup \left[t_{67\,;\,0{,}025}\,;\,+\infty\right[
+= \left]-\infty\,;\,-1{,}9960\right] \cup \left[1{,}9960\,;\,+\infty\right[$.
+
+\textbf{Étape~4 -- Valeur du critère.}
+\[
+  t_\text{obs}
+  = \frac{\bar{x} - m_0}{\dfrac{S_e}{\sqrt{n}}}
+  = \frac{2{,}1912 - 2{,}0000}{\dfrac{0{,}8853}{\sqrt{68}}}
+  = \frac{0{,}1912}{0{,}1074}
+  \approx \mathbf{1{,}78}
+\]
+
+\textbf{Étape~5 -- Conclusion.}
+$t_\text{obs} = 1{,}78 \notin RC$ :
+on \textbf{ne rejette pas $H_0$} au risque $5\,\%$.
+Le nombre moyen d'annales travaillées n'est pas significativement différent de~2,
+ce que confirme l'IC~95\,\% $[1{,}977\,;\,2{,}406]$ qui contient~2.

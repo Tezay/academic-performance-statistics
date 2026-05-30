@@ -1,26 +1,178 @@
 % ============================================================
 %  Section 4.5 – Tests du χ²
 % ============================================================
-%
-%  χ² de conformité (§ 3.4.2 du cours) :
-%      H0 : la distribution de X suit la loi de référence L
-%      Effectifs théoriques : ni = n × P(X ∈ classei | loi L)
-%      Critère : χ² = Σ (oi − ni)² / ni
-%      ddl = k − 1 ; seuil dans table Annexe 5.3
-%      Conditions : n≥50, ni≥5
-%
-%  χ² d'indépendance (§ 3.4.2 du cours) :
-%      H0 : X et Y sont indépendantes
-%      Effectifs théoriques : ni,j = oi,• × o•,j / n
-%      Critère : χ² = ΣΣ (oi,j − ni,j)² / ni,j
-%      ddl = (k1−1)(k2−1) ; seuil dans table Annexe 5.3
-%      Conditions : n≥50, ni,j≥5
-%
-%  Présenter les tableaux de contingence observé ET théorique côte à côte.
-%  Si conditions non réunies : le mentionner et présenter le test quand même.
-%
-% ============================================================
 
 \subsection{Tests du $\chi^2$}
 
-% TODO : tableaux de contingence + critère + conclusion
+% ── T4 ──────────────────────────────────────────────────────────────────────
+\paragraph{T4 -- Conformité de V12 (moyenne au bac) à une loi uniforme.}
+
+\textbf{Hypothèses.}
+$H_0$ : la distribution de V12 sur les $k = 4$ modalités est uniforme
+(chaque modalité équiprobable, $p_i = 1/4$) ;
+$H_1$ : la distribution n'est pas uniforme.
+
+\textbf{Effectifs théoriques.}
+$e_i = n \times p_i = 67/4 = 16{,}75$ pour chaque modalité.
+
+\textbf{Conditions} (§\,3.4.2) :
+$n = 67 \geq 50$ {\checkmark}, $\min(e_i) = 16{,}75 \geq 5$ {\checkmark}.
+
+\begin{table}[H]
+  \centering
+  \caption{Effectifs observés et théoriques -- V12}
+  \label{tab:chi2_T4}
+  \small
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    Modalité      & 8--11 & 12--14 & 15--17 & 18--20 \\
+    \midrule
+    Observé $o_i$ & 13    & 39     & 12     & 3      \\
+    Théorique $e_i$ & 16{,}75 & 16{,}75 & 16{,}75 & 16{,}75 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Critère.}
+\[
+  \chi^2_\text{obs}
+  = \sum_{i=1}^{4} \frac{(o_i - e_i)^2}{e_i}
+  = \frac{(13-16{,}75)^2}{16{,}75} + \frac{(39-16{,}75)^2}{16{,}75}
+  + \frac{(12-16{,}75)^2}{16{,}75} + \frac{(3-16{,}75)^2}{16{,}75}
+  \approx \mathbf{43{,}03}
+\]
+
+ddl $= k - 1 = 3$ ; seuil $\chi^2_{3\,;\,5\%} = 7{,}81$.
+
+\textbf{Conclusion.}
+$\chi^2_\text{obs} = 43{,}03 > 7{,}81$ : on \textbf{rejette $H_0$}.
+La distribution des niveaux de bac n'est pas uniforme : les modalités « 12--14 »
+représentent à elles seules 58,2\,\% de l'échantillon.
+La population étudiée est donc homogène en termes de niveau scolaire initial.
+
+% ── T5 ──────────────────────────────────────────────────────────────────────
+\paragraph{T5 -- Indépendance entre annales travaillées (V2) et assiduité aux CMs (V14).}
+
+\textbf{Hypothèses.}
+$H_0$ : V2 et V14 sont indépendantes ;
+$H_1$ : V2 et V14 sont associées.
+
+Les modalités ont été regroupées :
+V2 en « 0--1 » ($n=13$), « 2 » ($n=34$), « 3--4+ » ($n=21$) ;
+V14 en « Rarement » ($n=6$), « Presque tous » ($n=33$), « Tous » ($n=29$).
+
+\begin{table}[H]
+  \centering
+  \caption{Tableaux de contingence observé / théorique -- V2 $\times$ V14 ($n = 68$)}
+  \label{tab:chi2_T5}
+  \small
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering\textit{Observé}\\[4pt]
+    \begin{tabular}{@{}lrrr@{}}
+      \toprule
+      V2 \textbackslash{} V14 & Rarement & Presque & Tous \\
+      \midrule
+      0--1   & 0 & 5  & 8  \\
+      2      & 3 & 18 & 13 \\
+      3--4+  & 3 & 10 & 8  \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering\textit{Théorique}\\[4pt]
+    \begin{tabular}{@{}lrrr@{}}
+      \toprule
+      V2 \textbackslash{} V14 & Rarement & Presque & Tous \\
+      \midrule
+      0--1   & 1{,}15 & 6{,}31 & 5{,}54 \\
+      2      & 3{,}00 & 16{,}50 & 14{,}50 \\
+      3--4+  & 1{,}85 & 10{,}19 & 8{,}96 \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+\end{table}
+
+\textbf{Conditions.}
+$n = 68 \geq 50$ {\checkmark} ;
+mais $\min(e_{ij}) = 1{,}15 < 5$ {\texttimes}.
+La condition sur les effectifs théoriques n'est pas satisfaite pour la
+case (0--1, Rarement).
+Conformément à la consigne, on présente néanmoins le test à titre indicatif.
+
+\textbf{Critère.}
+ddl $= (3-1)(3-1) = 4$ ; seuil $\chi^2_{4\,;\,5\%} = 9{,}49$.
+\[
+  \chi^2_\text{obs} = \sum_{i,j}\frac{(o_{ij}-e_{ij})^2}{e_{ij}} \approx \mathbf{3{,}61}
+\]
+
+\textbf{Conclusion.}
+$\chi^2_\text{obs} = 3{,}61 < 9{,}49$ : on \textbf{ne rejette pas $H_0$} (à interpréter
+avec précaution au vu de la condition non satisfaite).
+Sur cet échantillon, on ne met pas en évidence d'association significative
+entre le nombre d'annales travaillées et l'assiduité aux cours magistraux.
+
+% ── T6 ──────────────────────────────────────────────────────────────────────
+\paragraph{T6 -- Indépendance entre fréquentation des permanences et moyenne au S1 (SC5/SC6).}
+
+\textbf{Hypothèses.}
+$H_0$ : la fréquentation des permanences pédagogiques et la moyenne au S1 sont indépendantes ;
+$H_1$ : elles sont associées.
+
+Les données proviennent de \texttt{ADD\_SC5\_SC6.csv} ($n = 79$ paires valides).
+La moyenne au S1 a été regroupée en trois classes :
+$<10$ ($n=15$), $[10\,;\,12]$ ($n=25$), $>12$ ($n=39$).
+La fréquentation des permanences est codée en trois modalités :
+« Jamais » ($n=27$), « Rarement » ($n=37$), « Régulièrement » ($n=15$).
+
+\begin{table}[H]
+  \centering
+  \caption{Tableaux de contingence observé / théorique -- Permanences $\times$ Moy. S1 ($n = 79$)}
+  \label{tab:chi2_T6}
+  \small
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering\textit{Observé}\\[4pt]
+    \begin{tabular}{@{}lrrr@{}}
+      \toprule
+      Perm. \textbackslash{} Moy. & $<10$ & $10$--$12$ & $>12$ \\
+      \midrule
+      Jamais        & 4  & 7  & 16 \\
+      Rarement      & 6  & 11 & 20 \\
+      Régulièrement & 5  & 7  & 3  \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering\textit{Théorique}\\[4pt]
+    \begin{tabular}{@{}lrrr@{}}
+      \toprule
+      Perm. \textbackslash{} Moy. & $<10$ & $10$--$12$ & $>12$ \\
+      \midrule
+      Jamais        & 5{,}13 & 8{,}54 & 13{,}33 \\
+      Rarement      & 7{,}03 & 11{,}71 & 18{,}27 \\
+      Régulièrement & 2{,}85 & 4{,}75 & 7{,}41 \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+\end{table}
+
+\textbf{Conditions.}
+$n = 79 \geq 50$ {\checkmark} ;
+$\min(e_{ij}) = 2{,}85 < 5$ {\texttimes}.
+La case (Régulièrement, $<10$) ne satisfait pas la condition.
+On présente le test à titre indicatif, conformément à la consigne.
+
+\textbf{Critère.}
+ddl $= (3-1)(3-1) = 4$ ; seuil $\chi^2_{4\,;\,5\%} = 9{,}49$.
+\[
+  \chi^2_\text{obs} \approx \mathbf{6{,}73}
+\]
+
+\textbf{Conclusion.}
+$\chi^2_\text{obs} = 6{,}73 < 9{,}49$ : on \textbf{ne rejette pas $H_0$}
+(résultat à interpréter avec prudence).
+On ne met pas en évidence d'association significative entre la fréquentation
+des permanences pédagogiques et la moyenne au S1 sur cet échantillon.
+Ce résultat peut s'expliquer par la faible proportion d'étudiant·es fréquentant
+régulièrement les permanences ($n = 15$ sur 79), ce qui limite la puissance du test.
