@@ -340,176 +340,115 @@ plt.close(fig)
 print("\n  -> bar_v14.pdf généré")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# T5 - χ² d'indépendance : V2 × V14  (§3.4.2)
-# V2  regroupée : ≤2 annales  |  ≥3 annales
-# V14 regroupée : Pas tous (Rarement+Presque tous)  |  Tous
-#
-# Justification du regroupement V14 :
-#   "Rarement" (n=6) seul rend ni,j < 5 partout.
-#   "Pas tous" = ne se déplace pas systématiquement en cours (modalités 1+2).
-#   "Tous" = présence totale (modalité 3). Dichotomie logique et symétrique.
-# ─────────────────────────────────────────────────────────────────────────────
-sep("T5 - χ² indépendance : V2 (annales) × V14 (assiduité CMs)")
+# T4 - chi2 conformite V12 ~ loi uniforme (k=4, ddl=3)
+sep("T4 - chi2 conformite V12")
 
-def v2_cat_t5(x):
-    x = x.strip()
-    if x in ("0", "1", "2"): return "≤2 annales"
-    if x in ("3", "4+"):     return "≥3 annales"
-    return None
-
-def v14_cat_t5(x):
-    x = x.strip()
-    if x in ("1 : Rarement", "2 : Presque tous"):  return "Pas tous"
-    if x == "3 : J'assiste à tous les CMs":         return "Tous"
-    return None
-
-V2_T5  = ["≤2 annales", "≥3 annales"]
-V14_T5 = ["Pas tous", "Tous"]
-
-obs_t5 = [[0] * len(V14_T5) for _ in range(len(V2_T5))]
-for _, row in df.iterrows():
-    c2  = v2_cat_t5(row[COL_V2])
-    c14 = v14_cat_t5(row[COL_V14])
-    if c2 and c14:
-        obs_t5[V2_T5.index(c2)][V14_T5.index(c14)] += 1
-
-print("  [V14 regroupée : Rarement+Presque tous -> «Pas tous» ; Tous -> «Tous»]")
-chi2_t5, _, ok_t5 = chi2_calc(obs_t5, V2_T5, V14_T5)
+obs_t4  = [v12_cnt[k] for k in V12_LABELS]
+ni_t4   = n12 / 4
+chi2_t4 = sum((o - ni_t4)**2 / ni_t4 for o in obs_t4)
+print(f"  n = {n12},  k = 4,  ni = {ni_t4:.2f},  ddl = 3")
+print(f"  Obs : {obs_t4}")
+print(f"  chi2_obs = {chi2_t4:.4f}")
+print(f"  Seuil chi2(3, 5%) = 7.815")
+print(f"  -> {'REJET H0' if chi2_t4 > 7.815 else 'NON-REJET'}")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Tests χ² initialement prévus - IMPOSSIBLES (conditions non satisfaites)
-# ─────────────────────────────────────────────────────────────────────────────
-sep("Tests χ² abandonnés - conditions non satisfaites (§3.4.2)")
+# T5 - chi2 independance V2 x V14 : impossible
+sep("T5 - chi2 independance V2 x V14")
 
-print("""
-  V12×V2 (prévu) :
-    Même avec regroupement maximal 2×2, ni,j min = 4,70 < 5.
-    V12 "8–11" ne compte que 13 individus : aucun regroupement
-    ne peut satisfaire ni,j ≥ 5 tout en restant interprétable.
-    -> Test abandonné ; mentionné dans §3 (limites méthodologiques).
-
-  V12×V14 (prévu) :
-    V14 "Rarement" ne compte que 6 individus.
-    Quel que soit le regroupement de V12, ni,j min ≤ 1,34 < 5.
-    -> Test abandonné ; mentionné dans §3 (limites méthodologiques).
-""")
+print("  Conditions non satisfaites : effectifs theoriques < 5.")
+print("  Test non interpretable.")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Dataset SC5/SC6
-# ─────────────────────────────────────────────────────────────────────────────
-sep("Dataset SC5/SC6  -  Exploration")
+# T6 - chi2 independance : Extra-scolaires x Moy. S1 (SC5/SC6)
+sep("T6 - chi2 independance : Extra-scolaires x Moy. S1 (SC5/SC6)")
 
 df5 = pd.read_csv(SC5_CSV, dtype=str)
-N5  = len(df5)
-print(f"  n brut SC5/SC6 = {N5}")
 
-COL_PERM   = df5.columns[8]
-COL_MOY_S1 = df5.columns[11]
-COL_FREQ   = df5.columns[12]
-COL_AN1    = df5.columns[5]
+COL_EXTRA  = df5.columns[7]   # freq activites extra-scolaires
+COL_MOY_S1 = df5.columns[11]  # moyenne S1
 
-def parse_float(s):
-    m = re.search(r"\d+[.,]?\d*", s.strip().replace(",", "."))
-    return float(m.group()) if m else None
+# Certaines valeurs de Moy.S1 sont du texte libre
+# Extrait le 1er nombre trouve dans la chaine
+def extraire_moy(s):
+    match = re.search(r"\d+[.,]?\d*", str(s).strip())
+    if match is None:
+        return None
+    return float(match.group().replace(",", "."))
 
-moy_s1_vals = [(i, parse_float(df5.iloc[i][COL_MOY_S1]))
-               for i in range(N5)
-               if parse_float(df5.iloc[i][COL_MOY_S1]) is not None]
-print(f"  Moy. S1 : {len(moy_s1_vals)} valeurs sur {N5}")
-
-perm_cnt = Counter(df5[COL_PERM].str.strip())
-print(f"\n  Permanences pédagogiques :")
-for k, v in sorted(perm_cnt.items(), key=lambda x: -x[1]):
-    print(f"    {k:>20} : {v}")
-
-freq_cnt = Counter(df5[COL_FREQ].str.strip())
-print(f"\n  Fréquence CMs (info) :")
-for k, v in sorted(freq_cnt.items(), key=lambda x: -x[1]):
-    print(f"    {k:>25} : {v}")
-print("  ⚠  Fréq. CMs : 98% dans Systématiquement/Souvent -> χ² d'indépendance impossible.")
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# T6 - χ² d'indépendance : Permanences × Moy. S1  (SC5/SC6)
-# Permanences regroupées : Peu (Jamais+Rarement)  |  Régulièrement (Régul.+Systém.)
-# Moy. S1     regroupées : ≤13                    |  >13
-#
-# Justification :
-#   Régul.+Systém. = 18 obs -> ni,j min acceptable avec 2×2 (min=5,42 ✓).
-#   Moy. ≤13 vs >13 : seuil autour de la mention Assez Bien (>13/20).
-# ─────────────────────────────────────────────────────────────────────────────
-sep("T6 - χ² indépendance : Permanences × Moy. S1 (SC5/SC6)")
-
-def perm_cat(x):
+def extra_cat(x):
     x = x.strip()
-    if x in ("Jamais", "Rarement"):                  return "Peu"
-    if x in ("Régulièrement", "Systématiquement"):   return "Régulièrement"
+    if x in ("Rarement", "Une fois par mois", "Jamais"):
+        return "1/mois ou moins"
+    if x == "Une fois par semaine":
+        return "1/semaine"
+    if x == "Plusieurs fois par semaine":
+        return "Plusieurs/semaine"
     return None
 
-def moy_cat(v):
-    return "≤ 13" if v <= 13 else "> 13"
+def moy_s1_cat(v):
+    if v < 11:
+        return "7-10"
+    if v < 14:
+        return "11-13"
+    return "14-16"
 
-PERM_CATS = ["Peu", "Régulièrement"]
-MOY_CATS  = ["≤ 13", "> 13"]
+EXTRA_CATS = ["1/mois ou moins", "1/semaine", "Plusieurs/semaine"]
+MOY_CATS   = ["7-10", "11-13", "14-16"]
 
-obs_t6 = [[0] * len(MOY_CATS) for _ in range(len(PERM_CATS))]
-for idx, moy in moy_s1_vals:
-    pc = perm_cat(df5.iloc[idx][COL_PERM])
-    mc = moy_cat(moy)
-    if pc:
-        obs_t6[PERM_CATS.index(pc)][MOY_CATS.index(mc)] += 1
+obs_t6 = [[0] * 3 for _ in range(3)]
+for _, row in df5.iterrows():
+    ec = extra_cat(row[COL_EXTRA])
+    ms = extraire_moy(row[COL_MOY_S1])
+    if ec is not None and ms is not None:
+        mc = moy_s1_cat(ms)
+        obs_t6[EXTRA_CATS.index(ec)][MOY_CATS.index(mc)] += 1
 
-print("  [Permanences : Peu (Jamais+Rarement) | Régulièrement (Régul.+Systém.)]")
-print("  [Moy. S1 : ≤13 | >13  - seuil mention Assez Bien]")
-chi2_t6, _, ok_t6 = chi2_calc(obs_t6, PERM_CATS, MOY_CATS)
+print("  Extra-sco. groupes : Rarement+1/mois+Jamais | 1/semaine | Plusieurs/semaine")
+print("  Moy. S1 groupes : 7-10 | 11-13 | 14-16")
+chi2_t6, _, ok_t6 = chi2_calc(obs_t6, EXTRA_CATS, MOY_CATS)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Récapitulatif
-# ─────────────────────────────────────────────────────────────────────────────
-sep("RÉCAPITULATIF - Valeurs pour les tableaux LaTeX")
+# Recapitulatif
+sep("RECAPITULATIF - Valeurs pour les tableaux LaTeX")
 
 ic_v14_marge = 1.96 * math.sqrt(p14_tous * (1 - p14_tous) / n14)
-ic_v2_marge  = 2.000 * se2 / math.sqrt(n2)
+ic_v2_marge  = 1.9960 * se2 / math.sqrt(n2)
 z_t1 = (p_lt7h - 0.5) / math.sqrt(0.25 / n6)
 z_t2 = (p14_tous - 1/3) / math.sqrt((1/3) * (2/3) / n14)
 t_t3 = (xbar2 - 2) / (se2 / math.sqrt(n2))
-chi2_t4 = ((13 - n12/3)**2 + (39 - n12/3)**2 + (15 - n12/3)**2) / (n12/3)
 
 print(f"""
-  ── Variables ──────────────────────────────────────────────
-  V2  n={n2}  x̄={xbar2:.4f}  Me={me2}  Q1={q1_2}  Q3={q3_2}  Mo={mo2}
-      σ²={sig2_obs:.4f}  σ={sig2:.4f}  Se²={se2_obs:.4f}  Se={se2:.4f}
+  Variables
+  V2  n={n2}  x_barre={xbar2:.4f}  Me={me2}  Q1={q1_2}  Q3={q3_2}  Mo={mo2}
+      sigma2={sig2_obs:.4f}  sigma={sig2:.4f}  Se2={se2_obs:.4f}  Se={se2:.4f}
       r(V2,V12) = {r_v2v12:.4f}
 
-  V6  n={n6}  Mo=4–6h  p̂(<7h) = {p_lt7h:.4f} ({p_lt7h*100:.1f}%)
+  V6  n={n6}  Mo=4-6h  p_chapeau(<7h) = {p_lt7h:.4f} ({p_lt7h*100:.1f}%)
 
-  V12 n={n12} (anomalie exclue)  Mo=12–14
-      Obs fusionnées χ²T4 : [13, 39, 15]  (8-11 | 12-14 | 15-20)
+  V12 n={n12} (anomalie exclue)  Mo=12-14
+      Obs T4 (k=4) : {obs_t4}  ni = {ni_t4:.2f}
 
-  V14 n={n14}  Mo=Presque tous  p̂(Tous) = {p14_tous:.4f} ({p14_tous*100:.1f}%)
+  V14 n={n14}  Mo=Presque tous  p_chapeau(Tous) = {p14_tous:.4f} ({p14_tous*100:.1f}%)
 
-  ── Intervalles de confiance (α=5%) ────────────────────────
-  IC proportion V14  z=1,96 :
+  Intervalles de confiance (alpha=5%)
+  IC proportion V14  z=1.96 :
     marge = {ic_v14_marge:.4f}
     IC = [{p14_tous - ic_v14_marge:.4f} ; {p14_tous + ic_v14_marge:.4f}]
 
-  IC moyenne V2  t_{{67}}≈2,000 :
+  IC moyenne V2  t_67 = 1.9960 :
     marge = {ic_v2_marge:.4f}
     IC = [{xbar2 - ic_v2_marge:.4f} ; {xbar2 + ic_v2_marge:.4f}]
 
-  ── Tests de conformité ────────────────────────────────────
-  T1  z = {z_t1:.4f}   (seuil bilatéral : ±1,96)   -> {'REJET H0' if abs(z_t1) > 1.96 else 'NON-REJET'}
-  T2  z = {z_t2:.4f}   (seuil unilatéral 5% : 1,645) -> {'REJET H0' if z_t2 > 1.645 else 'NON-REJET'}
-  T3  t = {t_t3:.4f}   (seuil bilatéral T(67) : ≈2,000) -> {'REJET H0' if abs(t_t3) > 2.0 else 'NON-REJET'}
+  Tests de conformite
+  T1  z = {z_t1:.4f}  (seuil bilateral : +/-1.96)    -> {'REJET H0' if abs(z_t1) > 1.96 else 'NON-REJET'}
+  T2  z = {z_t2:.4f}  (seuil unilateral 5% : 1.6449) -> {'REJET H0' if z_t2 > 1.6449 else 'NON-REJET'}
+  T3  t = {t_t3:.4f}  (seuil bilateral T(67) : 1.9960) -> {'REJET H0' if abs(t_t3) > 1.9960 else 'NON-REJET'}
 
-  ── Tests χ² ───────────────────────────────────────────────
-  T4  χ²_obs = {chi2_t4:.4f}  k=3 ddl=2  seuil=5,991  -> {'REJET H0' if chi2_t4 > 5.991 else 'NON-REJET'}
-  T5  χ²_obs = {chi2_t5:.4f}  (V2×V14)  ddl=1  seuil=3,841  -> {'REJET H0' if chi2_t5 > 3.841 else 'NON-REJET'}
-  T6  χ²_obs = {chi2_t6:.4f}  (Perm×MoyS1 SC5/SC6)  ddl=1  seuil=3,841  -> {'REJET H0' if chi2_t6 > 3.841 else 'NON-REJET'}
+  Tests chi2
+  T4  chi2_obs = {chi2_t4:.4f}  k=4 ddl=3  seuil=7.815  -> {'REJET H0' if chi2_t4 > 7.815 else 'NON-REJET'}
+  T5  impossible (conditions non satisfaites)
+  T6  chi2_obs = {chi2_t6:.4f}  (Extra-sco x MoyS1 SC5/SC6)  ddl=4  seuil=9.488  -> {'REJET H0' if chi2_t6 > 9.488 else 'NON-REJET'}
 """)
 
-sep("DONE - figures générées dans rapport/figures/")
+sep("DONE - figures generees dans rapport/figures/")

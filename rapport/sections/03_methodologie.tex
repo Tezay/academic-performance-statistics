@@ -26,15 +26,23 @@
 
 \subsection{Outils d'inférence retenus}
 
-Les outils d'inférence sont choisis en fonction de la nature des variables étudiées et de la question statistique posée. Le risque de première espèce est fixé à $\alpha = 5~\%$ pour l'ensemble des tests. Cela signifie que l'on accepte un risque de 5~\% de rejeter l'hypothèse nulle $H_0$ alors qu'elle est vraie.
+Le risque de première espèce est fixé à $\alpha = 5\,\%$ pour tous les tests.
+Le choix de l'outil dépend de la nature du paramètre étudié.
 
-Pour les proportions, nous utilisons des intervalles de confiance de proportion et des tests de conformité d'une proportion. C'est le cas pour T1, qui étudie la proportion d'étudiant·es dormant moins de 7 heures avant un DE, et pour T2, qui étudie la proportion d'étudiant·es assistant à tous les cours magistraux. Ces deux paramètres sont des proportions, notées respectivement $\pi_1$ et $\pi_2$.
-
-Pour le nombre moyen d'annales travaillées avant un CE ou un DE, nous utilisons un intervalle de confiance de la moyenne et un test de conformité d'une moyenne. En effet, la variable V2 est traitée comme une variable quantitative discrète et le paramètre étudié est une moyenne, notée $m$. Comme l'écart-type de la population n'est pas connu, on utilise l'écart-type estimé à partir des données et la loi de Student.
-
-Pour les variables qualitatives à plusieurs modalités, nous utilisons des tests du $\chi^2$. Le test T4 est un test du $\chi^2$ de conformité, car il compare la distribution observée de la variable V12, moyenne au bac en spécialités scientifiques, à une loi théorique uniforme. Les tests T5 et T6 sont des tests du $\chi^2$ d'indépendance, car ils étudient l'existence éventuelle d'une association entre deux variables. T5 porte sur le lien entre le nombre d'annales travaillées et l'assiduité aux cours magistraux. T6 porte sur le lien entre la fréquence de participation extra-scolaire et la moyenne obtenue au semestre 1.
-
-Ainsi, les tests de conformité sont utilisés lorsqu'une variable est comparée à une valeur ou à une loi de référence, tandis que les tests d'indépendance sont utilisés lorsqu'on cherche à savoir si deux variables sont statistiquement associées.
+\begin{table}[H]
+\centering\small
+\begin{tabular}{@{}cllll@{}}
+\toprule
+Test & Paramètre & Outil & Loi sous $H_0$ & Réf. \\
+\midrule
+T1, T2 & Proportion $\pi$ & Conformité proportion & $\mathcal{N}(0,1)$ & §\,3.4.1 \\
+T3     & Moyenne $m$      & Conformité moyenne    & $\mathcal{T}(67)$  & §\,3.4.1 \\
+T4     & Distribution     & $\chi^2$ de conformité   & $\chi^2(3)$     & §\,3.4.2 \\
+T6     & Association      & $\chi^2$ d'indépendance  & $\chi^2(4)$     & §\,3.4.2 \\
+\bottomrule
+\end{tabular}
+\caption{Outils statistiques retenus par type de paramètre}
+\end{table}
 
 \subsection{Vérification des conditions de validité}
 
@@ -89,4 +97,4 @@ S_e^2 = \frac{n}{n-1}\sigma^2_{\text{obs}}.
 \]
 Dans ce cas, le critère de test suit une loi de Student à $n-1$ degrés de liberté. Comme $n=68$, on utilise donc une loi de Student à $67$ degrés de liberté.
 
-Enfin, pour les tests T4, T5 et T6, les variables étudiées sont qualitatives ou regroupées en modalités. On utilise donc la loi du $\chi^2$. Pour T4, il s'agit d'un test du $\chi^2$ de conformité, avec $k-1$ degrés de liberté. Pour T5 et T6, il s'agit de tests du $\chi^2$ d'indépendance, avec $(k_1-1)(k_2-1)$ degrés de liberté.
+Enfin, pour T4 et T6, les variables étudiées sont qualitatives ou regroupées en modalités. On utilise donc la loi du $\chi^2$. Pour T4, il s'agit d'un test de conformité avec $k-1 = 3$ degrés de liberté. Pour T6, il s'agit d'un test d'indépendance avec $(k_1-1)(k_2-1) = 4$ degrés de liberté. T5 n'est pas applicable (cf.~§3.2).
