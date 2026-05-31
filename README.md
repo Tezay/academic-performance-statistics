@@ -25,6 +25,7 @@ La démarche :
 | Outil | Rôle |
 |---|---|
 | **LaTeX** | Rédaction du rapport scientifique |
+| **Python 3** | Calcul des statistiques et génération des figures |
 | **TeXstudio** | Éditeur LaTeX (coloration syntaxique, compilation intégrée) |
 | **MiKTeX** *(Windows)* / **MacTeX** *(macOS)* | Distribution LaTeX (compilateur pdfLaTeX + packages) |
 | **GitHub** | Versionnement du dépôt |
@@ -74,7 +75,40 @@ pdflatex --version
 
 ---
 
-## Utiliser le projet
+## Script Python – Calcul des statistiques et génération des figures
+
+Le script `rapport/figures_gen.py` calcule tous les paramètres statistiques du rapport (statistiques descriptives, IC, tests de conformité, tests du χ²) et génère les figures PDF dans `rapport/figures/`.
+
+### Installer les dépendances
+
+```bash
+# Créer et activer l'environnement virtuel
+python3 -m venv .venv
+
+# macOS / Linux
+source .venv/bin/activate
+
+# Windows
+.venv\Scripts\activate
+
+# Installer les dépendances
+pip install -r requirements.txt
+```
+
+### Lancer le script
+
+```bash
+# Depuis la racine du projet, avec le venv activé
+python rapport/figures_gen.py
+```
+
+Le script affiche dans le terminal toutes les valeurs numériques (x̄, Me, Q1, Q3, σ², IC, critères de test, χ²_obs) et génère les figures dans `rapport/figures/`. Les figures sont automatiquement incluses dans le rapport LaTeX via `\includegraphics`.
+
+> Les fonctions statistiques implémentant les formules du cours SM403 sont définies dans `rapport/stats_utils.py`.
+
+---
+
+## Compiler le PDF avec LaTeX
 
 ### 1. Cloner le dépôt
 
@@ -97,19 +131,6 @@ cd academic-performance-statistics
 
 > La première compilation peut télécharger quelques packages (MiKTeX uniquement) – accepter les invitations.
 
-### 4. Travailler sur une section
-
-Chaque membre travaille sur **son fichier de section** dans `rapport/sections/` (voir [GUIDE.md](GUIDE.md)).  
-Ne pas modifier `main.tex` ou `preambule.tex` sans concertation.
-
-### 5. Versionner ses modifications
-
-```bash
-git add .
-git commit -m "feat: rédiger statistiques descriptives variables quantitatives"
-git push
-```
-
 ---
 
 ## Structure du dépôt
@@ -117,34 +138,30 @@ git push
 ```
 academic-performance-statistics/
 │
-├── rapport/                    # Source LaTeX du rapport
-│   ├── main.tex                # Fichier maître (à compiler)
-│   ├── preambule.tex           # Packages et macros LaTeX
+├── rapport/                      # Source LaTeX du rapport
+│   ├── main.tex                  # Fichier maître (à compiler)
+│   ├── preambule.tex             # Packages et macros LaTeX
+│   ├── figures_gen.py            # Script Python – statistiques et figures
+│   ├── stats_utils.py            # Fonctions statistiques (formules du cours)
 │   ├── sections/
-│   │   ├── 01_cadre.tex        # Section 1 – Cadre de l'étude
-│   │   ├── 02_formulation.tex  # Section 2 – Formulation statistique
-│   │   ├── 03_methodologie.tex # Section 3 – Choix méthodologiques
-│   │   ├── 04_analyse.tex      # Section 4 – Analyse des données
-│   │   └── 05_interpretation.tex # Section 5 – Interprétation
-│   ├── figures/                # Graphiques générés (PNG/PDF)
-│   └── annexes/                # Fichiers d'annexes .tex
+│   │   ├── 01_cadre.tex          # Section 1 – Cadre de l'étude
+│   │   ├── 02_formulation.tex    # Section 2 – Formulation statistique
+│   │   ├── 03_methodologie.tex   # Section 3 – Choix méthodologiques
+│   │   ├── 04_analyse.tex        # Section 4 – Analyse des données (dispatcher)
+│   │   ├── 04a_desc_quantitatives.tex
+│   │   ├── 04b_desc_qualitatives.tex
+│   │   ├── 04c_intervalles.tex
+│   │   ├── 04d_conformite.tex
+│   │   ├── 04e_chi2.tex
+│   │   └── 05_interpretation.tex # Section 5 – Interprétation et discussion
+│   ├── figures/                  # Figures PDF générées par figures_gen.py
+│   └── annexes/                  # Fichiers d'annexes .tex
 │
-├── data/                       # Données des sondages (versionnées)
-│   ├── README.md               # Dictionnaire des variables
-│   ├── ADD_PP1_PP2.csv         # Sondage classes PP1 et PP2
-│   ├── ADD_SC1_SC2.csv         # Sondage classes SC1 et SC2
-│   ├── ADD_SC3_SC4.csv         # Sondage classes SC3 et SC4 ← principal
-│   └── ADD_SC5_SC6.csv         # Sondage classes SC5 et SC6
-├── GUIDE.md                    # Guide de travail - répartition en 5 parties
-└── README.md                   # Ce fichier
+├── data/                         # Données des sondages
+│   ├── README.md                 # Dictionnaire des variables
+│   ├── ADD_SC3_SC4.csv           # Sondage principal (n = 68)
+│   └── ADD_SC5_SC6.csv           # Sondage complémentaire (n = 84)
+│
+├── requirements.txt              # Dépendances Python
+└── README.md
 ```
-
----
-
-## Ressources utiles
-
-- **Guide de travail** : [GUIDE.md](GUIDE.md)
-- **Données** : [data/README.md](data/README.md)
-- Documentation LaTeX : [fr.overleaf.com/learn](https://fr.overleaf.com/learn)
-- Table de la loi de Student : annexe 5.1 du cours
-- Table du χ² : annexe 5.3 du cours
