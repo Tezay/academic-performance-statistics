@@ -14,9 +14,9 @@
 Ce projet s'inscrit dans le module **SM403 – Introduction à l'Analyse de données**. L'objectif est d'analyser, à l'aide des outils de **statistiques inférentielles** vus en cours, les facteurs de la vie quotidienne susceptibles d'influencer les résultats académiques des étudiant·es de P1 à l'EFREI.
 
 La démarche :
-1. Un **sondage Google Forms** a été conçu par nos classes de P2, administré aux classes P1.
+1. Un **sondage Google Forms** a été conçu par nos classes de P2, administré aux classes P1 à l'EFREI.
 2. Les résultats sont analysés via les outils du cours : statistiques descriptives, intervalles de confiance, tests de conformité et tests du χ².
-3. Les conclusions font l'objet d'un **rapport LaTeX de 4 pages maximum** et d'une **soutenance orale de 10 minutes**.
+3. Les conclusions font l'objet d'un **rapport LaTeX** et d'une **soutenance orale**.
 
 ---
 
@@ -45,11 +45,6 @@ La démarche :
    - Télécharger sur [texstudio.org](https://www.texstudio.org/)
    - Lancer l'installateur (accepter les options par défaut)
 
-3. **Configurer TeXstudio** :
-   - Ouvrir TeXstudio → menu **Options > Configurer TeXstudio**
-   - Onglet **Compilation** → vérifier que « Compilateur par défaut » est sur **pdfLaTeX**
-   - Onglet **Compilation** → vérifier que « Visionneuse PDF par défaut » est sur **Visionneuse intégrée** (ou SumatraPDF si installé)
-
 ### Sur macOS
 
 **Option A – via Homebrew (recommandé si Homebrew est installé) :**
@@ -66,12 +61,6 @@ brew install --cask texstudio
 2. **TeXstudio** : télécharger sur [texstudio.org](https://www.texstudio.org/) et glisser l'application dans `/Applications`
 
 > Après installation de MacTeX, fermer et rouvrir le terminal pour que `pdflatex` soit disponible dans le `PATH`.
-
-**Vérifier l'installation :**
-```bash
-pdflatex --version
-# doit afficher : pdfTeX 3.14... (TeX Live 20XX/MacTeX)
-```
 
 ---
 
